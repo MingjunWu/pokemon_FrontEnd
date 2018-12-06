@@ -32,18 +32,33 @@ function get_count_down_from_expire_time(expireTime){
 function loadMapScenario() {
     map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
     map_manager.map = map;
+    window.setInterval(refresh_pokemon, 1000);
     
-    for(var i in map_manager.map_items){
-        var map_item = map_manager.map_items[i];
-        var icon_url =  'https://raw.githubusercontent.com/chenditc/mypokemon.io/gh-pages/images/pushpin_images/pokemon/' + map_item["pokemon_id"] + '.png';
-        var count_down = get_count_down_from_expire_time(map_item["expire"]); 
-        var pushpin = new Microsoft.Maps.Pushpin(
-         new Microsoft.Maps.Location(map_item["latitude"],map_item["longitude"]), { 
-          title: count_down,
-          icon: icon_url
-     });
-    map.entities.push(pushpin);
-    }
     
+    
+}
+
+function refresh_pokemon(){
+ 
+ //Prepare PushPin
+ 
+  var layer = new Microsoft.Maps.Layer();
+  var pushPins = [];
+   for(var i in map_manager.map_items){
+          var map_item = map_manager.map_items[i];
+          var icon_url =  'https://raw.githubusercontent.com/chenditc/mypokemon.io/gh-pages/images/pushpin_images/pokemon/' + map_item["pokemon_id"] + '.png';
+          var count_down = get_count_down_from_expire_time(map_item["expire"]); 
+          var pushpin = new Microsoft.Maps.Pushpin(
+           new Microsoft.Maps.Location(map_item["latitude"],map_item["longitude"]), { 
+            title: count_down,
+            icon: icon_url
+       });
+      pushPins.push(pushpin);
+    } 
+    layer.add(pushPins);
+ //Remove old PushPin
+ map_manager.map.layers.clear();
+ //Add new PushPin
+ map>manager.map.layers.inseret(layer);
 }
 
