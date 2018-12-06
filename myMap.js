@@ -23,7 +23,7 @@ map_manager.map_items = [
 
 function get_count_down_from_expire_time(expireTime){
  var nowTime = new Date().getTime() / 1000;
- var time_left = expreTime - nowTime;
+ var time_left = expireTime - nowTime;
  var second = Math.floor(time_left % 60);
  var minute = Math.floor(time_left / 60);
  return minute + " : " + second;
