@@ -59,6 +59,6 @@ function refresh_pokemon(){
  //Remove old PushPin
  map_manager.map.layers.clear();
  //Add new PushPin
- map_manager.map.layers.inseret(layer);
+ map_manager.map.layers.insert(layer);
 }
 
